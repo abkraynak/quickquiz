@@ -1,4 +1,7 @@
 const questions = [];
+const unseenQuestions = [];
+
+pos = 0;
 
 addQuestionToQuiz('1001', 
     'abc123', 
@@ -26,15 +29,14 @@ addQuestionToQuiz('1003',
 function addQuestionToQuiz(qn_id, qz_id, title, choices, answer) {
     const question = { qn_id, qz_id, title, choices, answer };
     questions.push(question);
+    unseenQuestions.push(question);
 }
 
 function getQuestionsForQuiz(qz_id) {
-    result = questions.find(question => question.qz_id == qz_id);
-    if(result === undefined) {
-        result = { qn_id: 'null', qz_id: qz_id, title: 'This quiz doesn\'t have any questions', answers: 'null' }
+    const index = unseenQuestions.findIndex(question => question.qz_id == qz_id);
+    if(index !== -1) {
+        return unseenQuestions.splice(index, 1)[0];
     }
-    console.log(result);
-    return result;
 }
 
 module.exports = { addQuestionToQuiz, getQuestionsForQuiz }
