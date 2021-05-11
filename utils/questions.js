@@ -25,7 +25,6 @@ addQuestionToQuiz('1003',
 
 function addQuestionToQuiz(qn_id, qz_id, title, choices, answer) {
     const question = { qn_id, qz_id, title, choices, answer };
-    console.log(question);
     questions.push(question);
 }
 

@@ -48,6 +48,14 @@ io.on('connection', socket => {
     io.to(user.room).emit('message', formatMessage(user.username, msg));
   });
 
+  // Listen for start message to begin quiz
+  socket.on('start', () => {
+    const user = getCurrUser(socket.id);
+    io.to(user.room).emit('question', {
+      question: getQuestionsForQuiz(user.room),
+    });
+  });
+
   // Show next question on set interval
   /*setInterval(function() {
     
