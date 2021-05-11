@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/style.css">
+  <title>QuickQuiz</title>
+</head>
+<body>
+  <div class="page-container">
+    <header class="page-header">
+      <h1>Quiz</h1>
+      <a href="index.html" class="btn">Leave Game</a>
+    </header>
+    
+    <main class="page-main">
+      <div class="room-sidebar">
+        <h3>Room Name:</h3>
+        <h2 id="room-name">abc123</h2>
+        <h3>Players</h3>
+        <ul id="users">
+          <li>Brad</li>
+          <li>John</li>
+          <li>Mary</li>
+          <li>Paul</li>
+          <li>Mike</li>
+        </ul>
+      </div>
+      
+      <div class="question-main">
+        <div class="question">
+          <h2 class="title">What does HTTP stand for?</h2>
+          <al id="answers">
+            <li>Hyper text transfer protocol</li>
+            <li>Hypo text transfer protocol</li>
+          </al>
+        </div>
+      </div>
+
+      <div class="chat-messages">
+					<div class="message">
+						<p class="meta">Brad <span>9:12pm</span></p>
+						<p class="text">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
+							repudiandae.
+						</p>
+					</div>
+					<div class="message">
+						<p class="meta">Mary <span>9:15pm</span></p>
+						<p class="text">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
+							repudiandae.
+						</p>
+					</div>
+      </div>
+    
+    </main>
+    <div class="chat-form-container">
+      <form id="chat-form">
+        <input
+          id="msg"
+          type="text"
+          placeholder="Enter Message"
+          required
+          autocomplete="off"
+        />
+        <button class="btn"></i> Send</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
