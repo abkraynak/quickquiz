@@ -12,8 +12,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // When client connects
 io.on('connection', socket => {
-  console.log('New WS Connection...');
   socket.emit('message', 'Welcome to QuickQuiz!');
+  socket.broadcast.emit('message', 'New user joined');
+  socket.on('disconnect', () => {
+    io.emit('message', 'A user has left the game');
+  })
 });
 
 const PORT = process.env.PORT || 5000;
