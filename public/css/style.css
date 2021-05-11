@@ -116,8 +116,16 @@ a {
 	border-radius: 5px;
 }
 
+.question-main .question-choices .question {
+	font-size: 26px;
+	font-weight: bold;
+	color: var(--white);
+	margin-bottom: 15px;
+}
+
 .question-main ul li {
 	padding: 10px 0;
+	margin-bottom: 10px;
 }
 
 .chat-messages {
