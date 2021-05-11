@@ -72,7 +72,7 @@ a {
 
 .page-main {
 	display: grid;
-	grid-template-columns: auto auto auto;
+	grid-template-columns: 20% 50% 30%;
 }
 
 .room-sidebar {
@@ -98,15 +98,16 @@ a {
 }
 
 .question-main {
-	max-width: 500px;
-	background: #999;
-	margin: 30px auto;
+	background: var(--dark-800);
+	color: var(--white);
+	margin: 30px;
 	overflow: hidden;
+	height: 300px;
 }
 
 .question-main h2 {
 	font-size: 20px;
-	background: rgba(0, 0, 0, 0.1);
+	background: rgba(0, 0, 0);
 	padding: 10px;
 	margin-bottom: 20px;
 }
