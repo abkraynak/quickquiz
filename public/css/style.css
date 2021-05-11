@@ -100,16 +100,20 @@ a {
 .question-main {
 	background: var(--dark-800);
 	color: var(--white);
-	margin: 30px;
-	overflow: hidden;
-	height: 300px;
+	height: 400px;
+	padding: 30px;
+	max-height: 500px;
+	overflow-y: scroll;
 }
 
-.question-main h2 {
+.question-main .question-choices {
 	font-size: 20px;
-	background: rgba(0, 0, 0);
-	padding: 10px;
-	margin-bottom: 20px;
+	background-color: var(--light-color);
+	color: #fff;
+	padding: 30px;
+	height: 340px;
+	margin: 30px;
+	border-radius: 5px;
 }
 
 .question-main ul li {

@@ -38,10 +38,10 @@ io.on('connection', socket => {
       quiz: getQuiz(user.room),
     });
 
-    // Send waiting screen
+    /*// Send waiting screen
     io.to(user.room).emit('question', {
       question: { title: 'Waiting for quiz to start . . .' },
-    });
+    });*/
   });
 
   // Listen for chat messages and broadcast back to everyone
