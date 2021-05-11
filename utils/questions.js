@@ -1,5 +1,7 @@
 const questions = [];
 
+
+
 function addQuestionToQuiz(qn_id, qz_id, title, answers) {
     const question = { qn_id, qz_id, title, answers };
     questions.push(question);

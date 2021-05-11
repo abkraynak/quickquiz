@@ -13,6 +13,7 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 const admin = 'QuickQuiz';
+question = 0;
 
 // Static folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -43,6 +44,11 @@ io.on('connection', socket => {
     const user = getCurrUser(socket.id);
     io.to(user.room).emit('message', formatMessage(user.username, msg));
   });
+
+  // Show next question on set interval
+  /*setInterval(function() {
+    
+  }, 2000);*/
 
   // Player leaves the game
   socket.on('disconnect', () => {

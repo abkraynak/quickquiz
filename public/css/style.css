@@ -1,11 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 :root {
-	--dark-color-a: #212121;
-	--dark-color-b: #424242;
+	--dark-900: #212121;
+	--dark-800: #424242;
+	--dark-700: #616161;
+	--dark-600: #757575;
+	--dark-500: #bdbdbd;
+	--dark-400: #7b8794;
+	--white: #fff;
+	--black: #000;
 	--light-color: #334e68;
 	--success-color: #5cb85c;
-	--error-color: #d9534f;
+	--btn: #8f0031;
+
 }
 
 * {
@@ -17,7 +24,7 @@
 body {
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
-	background: var(--light-color);
+	background: var(--black);
 	margin: 20px;
 }
 
@@ -33,8 +40,8 @@ a {
 .btn {
 	cursor: pointer;
 	padding: 5px 15px;
-	background: var(--light-color);
-	color: var(--dark-color-a);
+	background: var(--btn);
+	color: var(--white);
 	border: 0;
 	font-size: 17px;
 }
@@ -43,13 +50,17 @@ a {
 
 .page-container {
 	max-width: 1500px;
-	background: #111;
+	background: var(--dark-900);
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
 	margin: 30px auto;
 	overflow: hidden;
 }
 
 .page-header {
-	background: var(--dark-color-a);
+	background: var(--dark-800);
 	color: #fff;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
@@ -65,7 +76,7 @@ a {
 }
 
 .room-sidebar {
-	background: var(--dark-color-b);
+	background: var(--dark-600);
 	color: #fff;
 	padding: 20px 20px 60px;
 	overflow-y: scroll;
@@ -73,7 +84,7 @@ a {
 
 .room-sidebar h2 {
 	font-size: 20px;
-	background: rgba(0, 0, 0, 0.1);
+	background: var(--dark-700);
 	padding: 10px;
 	margin-bottom: 20px;
 }
@@ -83,7 +94,7 @@ a {
 }
 
 .room-sidebar ul li {
-	padding: 10px 0;
+	padding: 5px 0;
 }
 
 .question-main {
@@ -131,7 +142,7 @@ a {
 
 .chat-form-container {
 	padding: 20px 30px;
-	background-color: var(--dark-color-a);
+	background-color: var(--dark-900);
 }
 
 .chat-form-container form {
@@ -155,14 +166,14 @@ a {
 .join-header {
 	text-align: center;
 	padding: 20px;
-	background: var(--dark-color-a);
+	background: var(--dark-900);
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 }
 
 .join-main {
 	padding: 30px 40px;
-	background: var(--dark-color-b);
+	background: var(--dark-700);
 }
 
 .join-main p {
