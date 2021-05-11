@@ -16,9 +16,6 @@ const admin = 'QuickQuiz';
 // Static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-addQuiz('abc123', 'Client-Server Networking Review');
-addQuiz('987xyz', 'SQL Databases');
-
 // Client connects
 io.on('connection', socket => {
   socket.on('joinRoom', ({ username, room }) =>  {

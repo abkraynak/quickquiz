@@ -1,18 +1,19 @@
 const quizzes = [];
 
+addQuiz('abc123', 'Client-Server Networking Review');
+addQuiz('987xyz', 'SQL Databases');
+
 function addQuiz(id, title) {
     const quiz = { id, title };
     quizzes.push(quiz);
-    
 }
 
 function getQuiz(id) {
-    res = quizzes.find(quiz => quiz.id === id);
-    if(res === undefined) {
-        res = {id: 'null', title: 'This room doesn\'t have a quiz'}
+    result = quizzes.find(quiz => quiz.id === id);
+    if(result === undefined) {
+        result = {id: 'null', title: 'This room doesn\'t have a quiz'}
     }
-    console.log(res);
-    return res;
+    return result;
 }
 
 module.exports = { addQuiz, getQuiz }
