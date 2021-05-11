@@ -16,7 +16,11 @@ io.on('connection', socket => {
   socket.broadcast.emit('message', 'New user joined');
   socket.on('disconnect', () => {
     io.emit('message', 'A user has left the game');
-  })
+  });
+  // Listen for chat messages and broadcast back to everyone
+  socket.on('chatMessage', (msg) => {
+    io.emit('message', msg);
+  });
 });
 
 const PORT = process.env.PORT || 5000;
