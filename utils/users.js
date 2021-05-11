@@ -1,6 +1,5 @@
 const users = [];
 
-// Join user to game
 function userJoin(id, username, room) {
     const user = { id, username, room };
     users.push(user);
@@ -11,4 +10,15 @@ function getCurrUser(id) {
     return users.find(user => user.id === id);
 }
 
-module.exports = { userJoin, getCurrUser }
+function userLeaves(id) {
+    const index = users.findIndex(user => user.id === id);
+    if(index !== -1) {
+        return users.splice(index, 1)[0];
+    }
+}
+
+function getRoomUsers(room) {
+    return users.filter(user => user.room === room);
+}
+
+module.exports = { userJoin, getCurrUser, userLeaves, getRoomUsers }

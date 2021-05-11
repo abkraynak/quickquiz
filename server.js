@@ -4,7 +4,7 @@ const express = require('express');
 const socketio = require('socket.io');
 
 const formatMessage = require('./utils/messages.js');
-const { userJoin, getCurrUser } = require('./utils/users.js');
+const { userJoin, getCurrUser, userLeaves, getRoomUsers } = require('./utils/users.js');
 
 const app = express();
 const server = http.createServer(app);
@@ -15,22 +15,39 @@ const admin = 'QuickQuiz';
 // Static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-// When client connects
+// Client connects
 io.on('connection', socket => {
   socket.on('joinRoom', ({ username, room }) =>  {
     const user = userJoin(socket.id, username, room);
     socket.join(user.room);
     socket.emit('message', formatMessage(admin, 'Welcome to QuickQuiz!'));
-    socket.broadcast.to(user.room).emit('message', formatMessage(admin, `${user.username} joined`));
+    socket.broadcast.to(user.room).emit('message', formatMessage(admin, `${user.username} joined the game`));
+    
+    // Update player list
+    io.to(user.room).emit('roomUsers', { 
+      room: user.room, 
+      users: getRoomUsers(user.room) 
+    });
   });
 
   // Listen for chat messages and broadcast back to everyone
   socket.on('chatMessage', (msg) => {
-    io.emit('message', formatMessage('USER', msg));
+    const user = getCurrUser(socket.id);
+    io.to(user.room).emit('message', formatMessage(user.username, msg));
   });
 
+  // Player leaves the game
   socket.on('disconnect', () => {
-    io.emit('message', formatMessage(admin, 'A user has left the game'));
+    const user = userLeaves(socket.id);
+    if(user) {
+      io.to(user.room).emit('message', formatMessage(admin,  `${user.username} left the game`));
+
+      // Update player list
+      io.to(user.room).emit('roomUsers', { 
+      room: user.room, 
+      users: getRoomUsers(user.room) 
+    });
+    }
   });
 });
 
