@@ -5,8 +5,8 @@ const socketio = require('socket.io');
 
 const formatMessage = require('./utils/messages.js');
 const { userJoin, getCurrUser, userLeaves, getRoomUsers } = require('./utils/users.js');
-const { addQuiz, getQuiz } = require('./utils/quizzes.js');
-const { addQuestionToQuiz, getQuestionsForQuiz } = require('./utils/questions.js');
+const { getQuiz } = require('./utils/quizzes.js');
+const { getQuestionsForQuiz } = require('./utils/questions.js');
 
 const app = express();
 const server = http.createServer(app);
@@ -14,6 +14,7 @@ const io = socketio(server);
 
 const admin = 'QuickQuiz';
 question = 0;
+gameStarted = false;
 
 // Static folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -21,7 +22,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Client connects
 io.on('connection', socket => {
   socket.on('joinRoom', ({ username, room }) =>  {
-    
     const user = userJoin(socket.id, username, room);
     socket.join(user.room);
     socket.emit('message', formatMessage(admin, 'Welcome to QuickQuiz!'));
@@ -37,9 +37,11 @@ io.on('connection', socket => {
     io.to(user.room).emit('quiz', {
       quiz: getQuiz(user.room),
     });
-    /*io.to(user.room).emit('question', {
-      question: getQuestionsForQuiz(user.room),
-    });*/
+    
+    // Send waiting screen
+    io.to(user.room).emit('question', {
+      question: { title: 'Waiting for quiz to start . . .' },
+    });
   });
 
   // Listen for chat messages and broadcast back to everyone
@@ -54,6 +56,7 @@ io.on('connection', socket => {
     io.to(user.room).emit('question', {
       question: getQuestionsForQuiz(user.room),
     });
+    gameStarted = true;
   });
 
   // Show next question on set interval

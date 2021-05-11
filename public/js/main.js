@@ -5,6 +5,7 @@ const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
 const leaveBtn = document.getElementById('leave-btn');
 const startBtn = document.getElementById('start-btn');
+const questionList = document.querySelector('.question-main')
 const quizTitle = document.getElementById('quiz-title');
 const questionTitle = document.getElementById('question-title');
 const answerList = document.getElementById('question-answers');
@@ -30,13 +31,13 @@ socket.on('quiz', ({ quiz }) => {
 
 // Get question
 socket.on('question', ({ question }) => {
-    outputQuestion(question);
-    outputAnswers(question);
+    newOutputQuestion(question);
+    questionList.scrollTop = questionList.scrollHeight; // Move down questions
+    //outputAnswers(question);
 });
 
 // Get chat messages from server
 socket.on('message', message => {
-    console.log(message);
     outputMessage(message);
     chatMessages.scrollTop = chatMessages.scrollHeight; // Auto scroll down to new message
 });
@@ -97,16 +98,33 @@ function outputQuiz(quiz) {
 
 // Output question
 function outputQuestion(question) {
+    questionTitle.innerText = '';
     questionTitle.innerText = question.title;
+}
+
+// Improved output question
+function newOutputQuestion(question) {
+    const div = document.createElement('div');
+    div.classList.add('question-choices');
+    div.innerHTML = `<p class="question">${question.title} </p>`;
+    if(question.choices){
+        question.choices.forEach((choice) => {
+            const li = document.createElement('li');
+            li.innerText = choice;
+            div.appendChild(li);
+        });
+    }
+    questionList.appendChild(div);
 }
 
 // Output answer choices
 function outputAnswers(question) {
-    answerList.innerHTML = '';
-    question.choices.forEach((choice) => {
-        const li = document.createElement('li');
-        li.innerText = choice;
-        console.log(li);
-        answerList.appendChild(li);
-    });
+    if(question.choices) {
+        answerList.innerHTML = '';
+        question.choices.forEach((choice) => {
+            const li = document.createElement('li');
+            li.innerText = choice;
+            answerList.appendChild(li);
+        });
+    }
 }
