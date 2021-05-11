@@ -37,7 +37,7 @@ io.on('connection', socket => {
     io.to(user.room).emit('quiz', {
       quiz: getQuiz(user.room),
     });
-    
+
     // Send waiting screen
     io.to(user.room).emit('question', {
       question: { title: 'Waiting for quiz to start . . .' },
@@ -57,6 +57,14 @@ io.on('connection', socket => {
       question: getQuestionsForQuiz(user.room),
     });
     gameStarted = true;
+  });
+
+  // Listen for next message for next question
+  socket.on('next', () => {
+    const user = getCurrUser(socket.id);
+    io.to(user.room).emit('question', {
+      question: getQuestionsForQuiz(user.room),
+    });
   });
 
   // Show next question on set interval
