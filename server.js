@@ -5,6 +5,7 @@ const socketio = require('socket.io');
 
 const formatMessage = require('./utils/messages.js');
 const { userJoin, getCurrUser, userLeaves, getRoomUsers } = require('./utils/users.js');
+const { addQuiz, getQuiz } = require('./utils/quizzes.js');
 
 const app = express();
 const server = http.createServer(app);
@@ -15,9 +16,13 @@ const admin = 'QuickQuiz';
 // Static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
+addQuiz('abc123', 'Client-Server Networking Review');
+addQuiz('987xyz', 'SQL Databases');
+
 // Client connects
 io.on('connection', socket => {
   socket.on('joinRoom', ({ username, room }) =>  {
+    
     const user = userJoin(socket.id, username, room);
     socket.join(user.room);
     socket.emit('message', formatMessage(admin, 'Welcome to QuickQuiz!'));
@@ -27,6 +32,11 @@ io.on('connection', socket => {
     io.to(user.room).emit('roomUsers', { 
       room: user.room, 
       users: getRoomUsers(user.room) 
+    });
+
+    // Send quiz details
+    io.to(user.room).emit('quiz', {
+      quiz: getQuiz(user.room),
     });
   });
 

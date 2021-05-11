@@ -4,8 +4,9 @@ const chatMessages = document.querySelector('.chat-messages');
 const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
 const leaveBtn = document.getElementById('leave-btn');
+const quizTitle = document.getElementById('quiz-title');
 
-// Get username and room
+// Get username and room (from URL)
 const { username, room } = Qs.parse(location.search, {
     ignoreQueryPrefix: true
 });
@@ -17,6 +18,16 @@ socket.emit('joinRoom', { username, room });
 socket.on('roomUsers', ({ room, users }) => {
     outputRoomName(room);
     outputUsers(users);
+});
+
+// Get quiz details
+socket.on('quiz', ({ quiz }) => {
+    outputQuiz(quiz);
+});
+
+// Get question
+socket.on('question', ({  }) => {
+
 });
 
 // Get chat messages from server
@@ -35,6 +46,7 @@ chatForm.addEventListener('submit', (e) => {
 
 });
 
+// Pop-up window to confirm leaving game
 leaveBtn.addEventListener('click', () => {
     const leaveGame = confirm('Are you sure you want to leave?');
     if(leaveGame) {
@@ -68,3 +80,7 @@ function outputUsers(users) {
     });
 }
 
+// Add quiz title
+function outputQuiz(quiz) {
+    quizTitle.innerText = quiz.title;
+}
