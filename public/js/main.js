@@ -4,6 +4,7 @@ const chatMessages = document.querySelector('.chat-messages');
 const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
 const leaveBtn = document.getElementById('leave-btn');
+const startBtn = document.getElementById('start-btn');
 const quizTitle = document.getElementById('quiz-title');
 const questionTitle = document.getElementById('question-title');
 const answerList = document.getElementById('question-answers');
@@ -56,6 +57,12 @@ leaveBtn.addEventListener('click', () => {
         window.location = '../index.html'
     }
 });
+
+// Start game
+startBtn.addEventListener('click', () => {
+    socket.emit('start');
+    socket.emit('chatMessage', 'The game was started');
+})
 
 // Output message to DOM
 function outputMessage(msg){
