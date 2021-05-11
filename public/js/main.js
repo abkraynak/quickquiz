@@ -11,6 +11,8 @@ const quizTitle = document.getElementById('quiz-title');
 const questionTitle = document.getElementById('question-title');
 const answerList = document.getElementById('question-answers');
 
+gameStarted = false;
+
 // Get username and room (from URL)
 const { username, room } = Qs.parse(location.search, {
     ignoreQueryPrefix: true
@@ -64,6 +66,7 @@ leaveBtn.addEventListener('click', () => {
 startBtn.addEventListener('click', () => {
     socket.emit('start');
     socket.emit('chatMessage', 'The game was started');
+    socket.emit('reset');
 });
 
 // Next question

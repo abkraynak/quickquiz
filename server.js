@@ -6,7 +6,7 @@ const socketio = require('socket.io');
 const formatMessage = require('./utils/messages.js');
 const { userJoin, getCurrUser, userLeaves, getRoomUsers } = require('./utils/users.js');
 const { getQuiz } = require('./utils/quizzes.js');
-const { getQuestionsForQuiz } = require('./utils/questions.js');
+const { getQuestionsForQuiz, resetQuestions } = require('./utils/questions.js');
 
 const app = express();
 const server = http.createServer(app);
@@ -65,6 +65,11 @@ io.on('connection', socket => {
     io.to(user.room).emit('question', {
       question: getQuestionsForQuiz(user.room),
     });
+  });
+
+  // Listen for reset message
+  socket.on('reset', () => {
+    resetQuestions();
   });
 
   // Show next question on set interval

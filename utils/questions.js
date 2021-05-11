@@ -1,5 +1,5 @@
-const questions = [];
-const unseenQuestions = [];
+var questions = [];
+var unseenQuestions = [];
 
 pos = 0;
 
@@ -39,4 +39,9 @@ function getQuestionsForQuiz(qz_id) {
     }
 }
 
-module.exports = { addQuestionToQuiz, getQuestionsForQuiz }
+function resetQuestions() {
+    unseenQuestions = questions.slice(0);
+    console.log('reset questions');
+}
+
+module.exports = { addQuestionToQuiz, getQuestionsForQuiz, resetQuestions }
