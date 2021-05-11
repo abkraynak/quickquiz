@@ -73,11 +73,6 @@ io.on('connection', socket => {
     });
   });
 
-  // Show next question on set interval
-  /*setInterval(function() {
-    
-  }, 2000);*/
-
   // Player leaves the game
   socket.on('disconnect', () => {
     const user = userLeaves(socket.id);
