@@ -64,9 +64,14 @@ leaveBtn.addEventListener('click', () => {
 
 // Start game
 startBtn.addEventListener('click', () => {
-    socket.emit('start');
-    socket.emit('chatMessage', 'The game was started');
-    socket.emit('reset');
+    if(gameStarted === false) {
+        socket.emit('start');
+        socket.emit('chatMessage', 'The game was started');
+        gameStarted = true;
+    }
+    else {
+        socket.emit('reset');
+    }
 });
 
 // Next question

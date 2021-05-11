@@ -13,8 +13,6 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 const admin = 'QuickQuiz';
-question = 0;
-gameStarted = false;
 
 // Static folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -38,10 +36,10 @@ io.on('connection', socket => {
       quiz: getQuiz(user.room),
     });
 
-    /*// Send waiting screen
+    // Send waiting screen
     io.to(user.room).emit('question', {
       question: { title: 'Waiting for quiz to start . . .' },
-    });*/
+    });
   });
 
   // Listen for chat messages and broadcast back to everyone
@@ -56,7 +54,6 @@ io.on('connection', socket => {
     io.to(user.room).emit('question', {
       question: getQuestionsForQuiz(user.room),
     });
-    gameStarted = true;
   });
 
   // Listen for next message for next question
@@ -70,6 +67,10 @@ io.on('connection', socket => {
   // Listen for reset message
   socket.on('reset', () => {
     resetQuestions();
+    const user = getCurrUser(socket.id);
+    io.to(user.room).emit('question', {
+      question: { title: 'Waiting for quiz to start . . .' },
+    });
   });
 
   // Show next question on set interval
