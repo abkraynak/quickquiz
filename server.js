@@ -6,6 +6,7 @@ const socketio = require('socket.io');
 const formatMessage = require('./utils/messages.js');
 const { userJoin, getCurrUser, userLeaves, getRoomUsers } = require('./utils/users.js');
 const { addQuiz, getQuiz } = require('./utils/quizzes.js');
+const { addQuestionToQuiz, getQuestionsForQuiz } = require('./utils/questions.js');
 
 const app = express();
 const server = http.createServer(app);
