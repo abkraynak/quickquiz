@@ -3,6 +3,7 @@ const chatForm = document.getElementById('chat-form');
 const chatMessages = document.querySelector('.chat-messages');
 const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
+const leaveBtn = document.getElementById('leave-btn');
 
 // Get username and room
 const { username, room } = Qs.parse(location.search, {
@@ -34,6 +35,13 @@ chatForm.addEventListener('submit', (e) => {
 
 });
 
+leaveBtn.addEventListener('click', () => {
+    const leaveGame = confirm('Are you sure you want to leave?');
+    if(leaveGame) {
+        window.location = '../index.html'
+    }
+});
+
 // Output message to DOM
 function outputMessage(msg){
     const div = document.createElement('div');
@@ -59,3 +67,4 @@ function outputUsers(users) {
         userList.appendChild(li);
     });
 }
+
