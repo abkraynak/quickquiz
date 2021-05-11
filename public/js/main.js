@@ -5,6 +5,7 @@ const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
 const leaveBtn = document.getElementById('leave-btn');
 const quizTitle = document.getElementById('quiz-title');
+const questionTitle = document.getElementById('question-title');
 
 // Get username and room (from URL)
 const { username, room } = Qs.parse(location.search, {
@@ -26,8 +27,10 @@ socket.on('quiz', ({ quiz }) => {
 });
 
 // Get question
-socket.on('question', ({  }) => {
-
+socket.on('question', ({ question }) => {
+    console.log('main.js');
+    console.log(question);
+    outputQuestion(question);
 });
 
 // Get chat messages from server
@@ -83,4 +86,14 @@ function outputUsers(users) {
 // Add quiz title
 function outputQuiz(quiz) {
     quizTitle.innerText = quiz.title;
+}
+
+// Output question
+function outputQuestion(question) {
+    questionTitle.innerText = question.title;
+}
+
+// Output answer choices
+function outputAnswers(question) {
+
 }

@@ -37,6 +37,9 @@ io.on('connection', socket => {
     io.to(user.room).emit('quiz', {
       quiz: getQuiz(user.room),
     });
+    io.to(user.room).emit('question', {
+      question: getQuestionsForQuiz(user.room),
+    });
   });
 
   // Listen for chat messages and broadcast back to everyone
