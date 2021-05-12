@@ -1,8 +1,6 @@
 var questions = [];
 var unseenQuestions = [];
 
-pos = 0;
-
 addQuestionToQuiz('1001', 
     'abc123', 
     'What does HTTP stand for?', 
@@ -25,6 +23,30 @@ addQuestionToQuiz('1003',
         'False' ], 
     'False' );
 
+addQuestionToQuiz('1004', 
+    'abc123', 
+    'A server can communicate to multiple clients at once using TCP.', 
+    [   'True', 
+        'False' ], 
+    'False' );
+
+addQuestionToQuiz('1005', 
+    'abc123', 
+    'IPv6 src and dst addresses are how long?', 
+    [   '32 bits', 
+        '32 bytes',
+        '64 bytes',
+        '128 bits' ], 
+    '128 bites' );
+
+addQuestionToQuiz('1006', 
+    '987xyz', 
+    'How do you delete a table?', 
+    [   'DELETE TABLE TableName;', 
+        'DROP TABLE TableName;',
+        'DELETE FROM TableName;',
+        'REMOVE ALL DATA FROM TableName' ], 
+    'DROP TABLE TableName;' );
 
 function addQuestionToQuiz(qn_id, qz_id, title, choices, answer) {
     const question = { qn_id, qz_id, title, choices, answer };
