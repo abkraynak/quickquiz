@@ -117,9 +117,10 @@ function newOutputQuestion(question) {
     div.innerHTML = `<p class="question">${question.title} </p>`;
     if(question.choices){
         question.choices.forEach((choice) => {
-            const li = document.createElement('li');
-            li.innerText = choice;
-            div.appendChild(li);
+            const button = document.createElement('button');
+            button.classList.add('select-btn');
+            button.innerText = choice;
+            div.appendChild(button);
         });
     }
     questionList.appendChild(div);
