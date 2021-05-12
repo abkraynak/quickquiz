@@ -41,7 +41,6 @@ function getQuestionsForQuiz(qz_id) {
 
 function resetQuestions() {
     unseenQuestions = questions.slice(0);
-    console.log('reset questions');
 }
 
 module.exports = { addQuestionToQuiz, getQuestionsForQuiz, resetQuestions }

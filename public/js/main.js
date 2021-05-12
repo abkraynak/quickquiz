@@ -110,12 +110,6 @@ function outputQuiz(quiz) {
     quizTitle.innerText = quiz.title;
 }
 
-// Output question
-function outputQuestion(question) {
-    questionTitle.innerText = '';
-    questionTitle.innerText = question.title;
-}
-
 // Improved output question
 function newOutputQuestion(question) {
     const div = document.createElement('div');
@@ -129,16 +123,4 @@ function newOutputQuestion(question) {
         });
     }
     questionList.appendChild(div);
-}
-
-// Output answer choices
-function outputAnswers(question) {
-    if(question.choices) {
-        answerList.innerHTML = '';
-        question.choices.forEach((choice) => {
-            const li = document.createElement('li');
-            li.innerText = choice;
-            answerList.appendChild(li);
-        });
-    }
 }
