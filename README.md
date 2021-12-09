@@ -6,7 +6,7 @@ A web application to create, host, and play timed quizzes as a group.
 
 ## Site
 ### Landing Page
-[](https://github.com/abkraynak/quickquiz/blob/master/images/landing_page.png?raw=true)
+![](https://raw.githubusercontent.com/abkraynak/quickquiz/master/images/landing_page.png)
 
 ## Author
 - Andrew Kraynak ([LinkedIn](https://www.linkedin.com/in/abkraynak/), [Github](https://github.com/abkraynak))
